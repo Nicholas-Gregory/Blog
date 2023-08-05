@@ -2,6 +2,7 @@ const sequelize = require('./config/connection');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
@@ -16,6 +17,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controllers'));
 
