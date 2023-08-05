@@ -20,7 +20,6 @@ Post.init({
     },
     creatorId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
             model: 'user',
             key: 'id'
@@ -28,7 +27,8 @@ Post.init({
     }
 },
 {
-    sequelize,    
+    sequelize,  
+    freezeTableName: true,  
     modelName: 'post'
 });
 
