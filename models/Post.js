@@ -28,8 +28,7 @@ Post.init({
     }
 },
 {
-    sequelize,
-    underscored: true,
+    sequelize,    
     modelName: 'post'
 });
 
