@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { Post, Comment, User } = require('../../models');
-const { postById, apiError } = require('./utils');
+const { postById, apiError } = require('../../utils');
 
 // GET all posts in JSON
 router.get('/', async (req, res) => {
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
                 include: includes
             });
 
-            res.status(200).json({ message: "GET /api/posts successfull!", data: postData[0].get({ plain: true }) });
+            res.status(200).json({ message: "GET /api/posts successful!", data: postData[0].get({ plain: true }) });
         } catch (err) {
             res.status(500).json(apiError(err));
         }
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
     try {
         const newData = (await Post.create(postData)).get({ plain: true });
 
-        res.status(201).json({ message: "POST /api/posts successfull!", data: newData });
+        res.status(201).json({ message: "POST /api/posts successful!", data: newData });
     } catch (err) {
         res.status(500).json(apiError(err));
     }
@@ -63,7 +63,7 @@ router.put('/:id', async (req, res) => {
         await Post.update(req.body, { where: { id: id } });
         const newPost = await postById(id);
         
-        res.status(200).json({ message: "PUT /api/posts successfull!", data: newPost });
+        res.status(200).json({ message: "PUT /api/posts successful!", data: newPost });
     } catch (err) {
         res.status(500).json(apiError(err));
     }
@@ -76,7 +76,7 @@ router.delete('/:id', async (req, res) => {
         const deletedPost = await postById(id);
         await Post.destroy({ where: { id: id } });
 
-        res.status(200).json({ message: "DELETE /api/posts successfull!", data: deletedPost });
+        res.status(200).json({ message: "DELETE /api/posts successful!", data: deletedPost });
     } catch (err) {
         res.status(500).json(apiError(err));
     }

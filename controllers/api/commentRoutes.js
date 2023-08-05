@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const Comment = require('../../models/Comment');
-const { apiError } = require('./utils');
+const { apiError } = require('../../utils');
 
 // POST a comment
 router.post('/', async (req, res) => {
