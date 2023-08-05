@@ -15,11 +15,11 @@ router.post('/', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        await User.create({
+        const userData = (await User.create({
             userName: user.userName,
             email: user.email,
             password: hashedPassword
-        });
+        })).get({ plain: true });
 
         req.session.save(() => {
             req.session.userId = userData.id;
