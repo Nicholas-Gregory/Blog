@@ -4,13 +4,32 @@ const loginHandler = async event => {
     const usernameOrEmail = document.getElementById("username-or-email").value.trim();
     const password = document.getElementById("login-password").value.trim();
 
-    const result = await fetch('/api/user/login', {
-        method: 'POST',
-        body: JSON.stringify({
+    let result;
+    if (usernameOrEmail.split('').includes('@')) {
+        result = await fetch('/api/users/login?byEmail=true', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: usernameOrEmail,
+                password: password
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else {
+        result = await fetch('/api/users/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                userName: usernameOrEmail,
+                password: password
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
 
-        }),
-        headers: { 'Content-Type': 'application/json'}
-    });
+    if (result.ok) {
+        document.location.replace('/')
+    } else {
+        alert((await result.json()).message);
+    }
 };
 
 const createAccountHandler = async event => {
@@ -29,6 +48,12 @@ const createAccountHandler = async event => {
         }),
         headers: { 'Content-Type': 'application/json'}
     });
+
+    if (result.ok) {
+        document.location.replace('/');
+    } else {
+        alert((await result.json()).message)
+    }
 
     console.log(result);
 };
