@@ -48,9 +48,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const postData = req.body;
     try {
-        await Post.create(postData);
+        const newData = (await Post.create(postData)).get({ plain: true });
 
-        res.status(201).json({ message: "POST /api/posts successfull!", data: postData });
+        res.status(201).json({ message: "POST /api/posts successfull!", data: newData });
     } catch (err) {
         res.status(500).json(apiError(err));
     }

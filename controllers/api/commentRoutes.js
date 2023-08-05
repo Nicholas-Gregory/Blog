@@ -7,9 +7,9 @@ const { apiError } = require('./utils');
 router.post('/', async (req, res) => {
     const commentData = req.body
     try {
-        await Comment.create(commentData);
+        const newData = (await Comment.create(commentData)).get({ plain: true });
 
-        res.status(201).json({ message: "POST /api/comments successful!", data: commentData });
+        res.status(201).json({ message: "POST /api/comments successful!", data: newData });
     } catch (err) {
         res.status(500).json(apiError(err));
     }
