@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const Post = require('../../models/Post');
 
-const postById = async id => (await Post.findAll({ where: { id: id } }))[0].get({ plain: true });
-
-const apiError = err => ({ error: true, message: err.message });
+const { Post, Comment, User } = require('../../models');
+const { postById, apiError } = require('./utils');
 
 // GET all posts in JSON
 router.get('/', async (req, res) => {
@@ -31,8 +29,8 @@ router.get('/:id', async (req, res) => {
     } else {
         try {
             const includes = [];
-            if (includeComments) includes.push({ model: 'comment' });
-            if (includeAuthors) includes.push({ model: 'user' });
+            if (includeComments) includes.push({ model: Comment });
+            if (includeAuthors) includes.push({ model: User });
 
             const postData = await Post.findAll({
                 where: { id: id },
@@ -48,10 +46,11 @@ router.get('/:id', async (req, res) => {
 
 // POST a post
 router.post('/', async (req, res) => {
+    const postData = req.body;
     try {
-        await Post.create(req.body);
+        await Post.create(postData);
 
-        res.status(201).json({ message: "POST /api/posts successfull!", data: req.body });
+        res.status(201).json({ message: "POST /api/posts successfull!", data: postData });
     } catch (err) {
         res.status(500).json(apiError(err));
     }
