@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { Post, Comment, User } = require('../../models');
-const { postById, apiError } = require('../../utils/utils');
+const { postById, apiError, auth } = require('../../utils/utils');
 
 // GET all posts in JSON
 router.get('/', async (req, res) => {
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST a post
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const postData = req.body;
     postData.creatorId = req.session.userId;
 
@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT to update a post
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const id = req.params.id;
     try {
         await Post.update(req.body, { where: { id: id } });
@@ -72,7 +72,7 @@ router.put('/:id', async (req, res) => {
 });
 
 //DELETE a post
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const id = req.params.id;
     try {
         const deletedPost = await postById(id);

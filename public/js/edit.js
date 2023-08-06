@@ -23,7 +23,19 @@ const saveHandler = async event => {
 };
 
 const deleteHandler = async event => {
+    event.preventDefault();
 
+    const result = await fetch(`/api/posts/${postId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (result.ok) {
+        alert("Post successfully deleted!");
+        document.location.replace('/dashboard');
+    } else {
+        alert((await result.json()).message);
+    }
 };
 
 document.getElementById('save').addEventListener('click', saveHandler);
