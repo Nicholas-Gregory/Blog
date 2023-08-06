@@ -15,4 +15,14 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+router.get('/edit/:id', auth, async (req, res) => {
+    try {  
+        const post = (await Post.findByPk(req.params.id)).get({ plain: true });
+
+        res.render('edit', { post });
+    } catch (err) {
+        res.status(500).json(apiError(err));
+    }
+})
+
 module.exports = router;
