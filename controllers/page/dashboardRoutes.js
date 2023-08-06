@@ -1,8 +1,18 @@
 const router = require('express').Router();
-const { auth } = require('../../utils');
+const { auth, apiError } = require('../../utils');
 
-router.get('/', auth, (req, res) => {
-    res.render('dashboard');
+const { User, Post } = require('../../models');
+
+router.get('/', auth, async (req, res) => {
+    try {
+        const posts = (await User.findByPk(req.session.userId, {
+            include: [{ model: Post }]
+        })).get({ plain: true }).posts;
+
+        res.render('dashboard', { posts });
+    } catch (err) {
+        res.status(500).json(apiError(err));
+    }
 });
 
 module.exports = router;

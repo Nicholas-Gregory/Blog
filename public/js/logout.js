@@ -9,7 +9,7 @@ const logoutClickHandler = async event => {
     if (response.ok) {
         document.location.replace('/login');
     } else {
-        alert(response.statusText);
+        alert("Not logged in");
     }
 }
 

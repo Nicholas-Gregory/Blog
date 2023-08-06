@@ -1,4 +1,7 @@
 <form id="post-submission-form">
+    <h1>
+        Compose a new post
+    </h1>
     <h2>
         Post Title
     </h2>
@@ -9,4 +12,12 @@
     <textarea name="contents" id="contents" cols="30" rows="10"></textarea>
     <button type="submit">Submit Post</button>
 </form>
+<h1>
+    Your Posts
+</h1>
+{{#each posts as |post|}}
+    <p>
+        {{post.contents}}
+    </p>
+{{/each}}
 <script src="/js/dashboard.js"></script>
