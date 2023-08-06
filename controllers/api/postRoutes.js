@@ -47,6 +47,8 @@ router.get('/:id', async (req, res) => {
 // POST a post
 router.post('/', async (req, res) => {
     const postData = req.body;
+    postData.creatorId = req.session.userId;
+
     try {
         const newData = (await Post.create(postData)).get({ plain: true });
 
