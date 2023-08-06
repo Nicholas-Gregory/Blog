@@ -1,1 +1,19 @@
-<p>Home</p>
+{{#each posts as |post|}}
+    <div>
+        <h2>
+            {{post.title}}
+        </h2>
+        <p>
+            {{post.contents}}
+        </p>
+        <p>
+            Posted by: {{post.creatorId}}
+        </p>
+        <p>
+            Created at: {{post.createdAt}}
+        </p>
+        <p>
+            Last updated: {{post.updatedAt}}
+        </p>
+    </div>
+{{/each}}
