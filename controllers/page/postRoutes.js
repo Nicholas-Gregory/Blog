@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../../models');
 
-const { apiError } = require('../../utils')
+const { apiError } = require('../../utils/utils')
 
 router.get('/:id', async (req, res) => {
     try {

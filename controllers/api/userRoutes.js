@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 
 const User = require('../../models/User');
-const { apiError } = require('../../utils');
+const { apiError } = require('../../utils/utils');
 
 router.post('/', async (req, res) => {
     const user = req.body;

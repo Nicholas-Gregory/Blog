@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { Post, Comment, User } = require('../../models');
-const { postById, apiError } = require('../../utils');
+const { postById, apiError } = require('../../utils/utils');
 
 // GET all posts in JSON
 router.get('/', async (req, res) => {

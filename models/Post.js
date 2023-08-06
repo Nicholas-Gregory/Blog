@@ -15,7 +15,7 @@ Post.init({
         allowNull: false
     },
     contents: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     creatorId: {
