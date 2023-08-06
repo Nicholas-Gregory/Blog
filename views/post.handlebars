@@ -1,0 +1,46 @@
+<h1>
+    {{post.title}}
+</h1>
+<p>
+    {{post.contents}}
+</p>
+<p>
+    Posted by: {{post.user.userName}}
+</p>
+<p>
+    Created at: {{post.createdAt}}
+</p>
+<p>
+    Last updated: {{post.updatedAt}}
+</p>
+<h2>
+    Comments
+</h2>
+{{#if loggedIn}}
+    <div id="current-user" data-user-id="{{userId}}"></div>
+    <div id="post-id", data-post-id="{{post.id}}"></div>
+    <h3>
+        Add a comment!
+    </h3>
+    <form id="comment-form">
+        <textarea 
+            name="add-comment" 
+            id="add-comment" 
+            cols="30" 
+            rows="10"
+        ></textarea>
+        <button type="submit">Post Comment</button>
+    </form>
+{{/if}}
+{{#each post.comments as |comment|}}
+    <p>
+        Commented by: {{comment.user.userName}}
+    </p>
+    <p>
+        Posted on: {{comment.createdAt}}
+    </p>
+    <p>
+        {{comment.contents}}
+    </p>
+{{/each}}
+<script src="/js/post.js"></script>

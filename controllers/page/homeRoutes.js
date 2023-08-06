@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
         title: post.title,
         contents: post.contents,
         creatorName: post.user.userName,
+        creatorId: post.creatorId,
         createdAt: post.createdAt,
         updatedAt: post.updatedAt
     }));
