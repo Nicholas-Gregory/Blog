@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+const { Post, User } = require('../models');
 
 module.exports = {
    postById: async id => (await Post.findAll({ where: { id: id } }))[0].get({ plain: true }),

@@ -1,0 +1,35 @@
+:root {
+    --box-background: lightgrey;
+    --box-text: rgb(34, 34, 34);
+    --box-border: black;
+    --box-border-radius: 3px;
+    --box-margin: 5px;
+    --box-padding: 3px;
+    --container-background: rgb(175, 0, 0);
+    --page-background: lightblue;
+}
+
+body {
+    font-family: 'REM', sans-serif;
+    background-color: var(--page-background);
+}
+
+nav {
+    background-color: var(--container-background);
+    padding: 5px;
+}
+
+nav li {
+    list-style: none;
+    display: inline;
+    margin: var(--box-margin);
+    padding: var(--box-padding);
+    border: solid var(--box-border);
+    border-radius: var(--box-border-radius);
+    background-color: var(--box-background);
+    color: var(--box-text);
+}
+a {
+    color: var(--box-text);
+    text-decoration: none;
+}
